@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "./components/Navbar";
-import { Heart, Search, UserRound } from "lucide-react";
+import { Heart, Search, ShoppingCart, UserRound } from "lucide-react";
 import MobileNavbar from "./components/MobileNavbar";
 
 import MiniCart from "./components/MiniCart";
@@ -14,13 +14,8 @@ const Header = () => {
         {/* Logo Section */}
         <div className="col logo w-full text-center md:w-auto">
           <Link href="/" className="flex items-center gap-1">
-            <Image
-              src="/images/logo-icon.png"
-              alt="Furniro Logo"
-              width={50}
-              height={32}
-            />
-            <h1 className="font-bold text-[34px]">Furniro</h1>
+          <ShoppingCart size={'35'} className="text-primary"/>
+            <h1 className="font-bold text-[34px]">NextCart</h1>
           </Link>
         </div>
 

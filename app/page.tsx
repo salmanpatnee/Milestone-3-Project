@@ -122,27 +122,23 @@ export default function Home() {
     <div>
       <Hero />
 
-      <section className="py-14">
+      {/* <section className="py-14">
         <div className="wrapper">
-          {/* Section Title */}
           <h2 className="title">Browse The Range</h2>
 
-          {/* Description Text */}
           <p className="text-text-light text-xl text-center">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           </p>
 
-          {/* Categories Grid */}
           <div className="grid sm:grid-cols-3 gap-3 mt-14">
-            {/* Rendering Category Cards */}
             {categories.map((category) => (
               <CategoryCard key={category.imageUrl} category={category} />
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
-      <section className="mb-14">
+      <section className="my-14 ">
         <div className="wrapper">
           {/* Section Title */}
           <header>
@@ -168,7 +164,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-secondary py-11">
+      <section className="bglight py-11">
         <div className="wrapper flex items-center">
           <div className="lg:w-4/12 w-full">
             <h3 className="font-bold lg:text-[40px] text-3xl mb-2">
@@ -216,198 +212,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-16 text-center">
-        <div>
-          <p className="text-text-light text-xl text-center font-semibold">
-            Share your setup with
-          </p>
-          <h2 className="title">#FuniroFurniture</h2>
-
-          <div className="md:grid grid-cols-2 md:grid-cols-5 gap-4 hidden">
-            {/* First Grid Item */}
-            <div className="grid gap-4">
-              <div className="flex justify-between items-center">
-                <Image
-                  className="object-contain max-w-full rounded-lg transition-transform transform hover:scale-105 hover:shadow-lg"
-                  src="/images/gallery-1.png"
-                  alt=""
-                  width={78}
-                  height={382}
-                />
-              </div>
-              <div className="flex justify-between items-center">
-                <Image
-                  className="object-contain max-w-full rounded-lg transition-transform transform hover:scale-105 hover:shadow-lg"
-                  src="/images/gallery-2.png"
-                  alt=""
-                  width={185}
-                  height={323}
-                />
-              </div>
-            </div>
-
-            {/* Second Grid Item */}
-            <div className="grid gap-4">
-              <div className="flex justify-between items-center">
-                <Image
-                  className="object-contain max-w-full rounded-lg transition-transform transform hover:scale-105 hover:shadow-lg"
-                  src="/images/gallery-3.png"
-                  alt=""
-                  width={451}
-                  height={312}
-                />
-              </div>
-              <div className="flex justify-between items-center">
-                <Image
-                  className="object-contain max-w-full rounded-lg transition-transform transform hover:scale-105 hover:shadow-lg"
-                  src="/images/gallery-4.png"
-                  alt=""
-                  width={344}
-                  height={242}
-                />
-              </div>
-            </div>
-
-            {/* Third Grid Item (with row span) */}
-            <div className="grid gap-4 row-span-2">
-              <div className="flex justify-between items-center">
-                <Image
-                  className="object-contain max-w-full rounded-lg transition-transform transform hover:scale-105 hover:shadow-lg"
-                  src="/images/gallery-5.png"
-                  alt=""
-                  width={295}
-                  height={392}
-                />
-              </div>
-            </div>
-
-            {/* Fourth Grid Item */}
-            <div className="grid gap-4">
-              <div className="flex justify-between items-center">
-                <Image
-                  className="object-contain max-w-full rounded-lg transition-transform transform hover:scale-105 hover:shadow-lg"
-                  src="/images/gallery-6.png"
-                  alt=""
-                  width={290}
-                  height={348}
-                />
-              </div>
-              <div className="flex justify-between items-center">
-                <Image
-                  className="object-contain max-w-full rounded-lg transition-transform transform hover:scale-105 hover:shadow-lg"
-                  src="/images/gallery-7.png"
-                  alt=""
-                  width={178}
-                  height={242}
-                />
-              </div>
-            </div>
-
-            {/* Fifth Grid Item */}
-            <div className="grid gap-4">
-              <div className="flex justify-between items-center">
-                <Image
-                  className="object-contain max-w-full rounded-lg transition-transform transform hover:scale-105 hover:shadow-lg"
-                  src="/images/gallery-8.png"
-                  alt=""
-                  width={262}
-                  height={433}
-                />
-              </div>
-              <div className="flex justify-between items-center">
-                <Image
-                  className="object-contain max-w-full rounded-lg transition-transform transform hover:scale-105 hover:shadow-lg"
-                  src="/images/gallery-9.png"
-                  alt=""
-                  width={258}
-                  height={196}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-4 md:hidden">
-            {/* Row 1 */}
-            <div className="flex justify-center items-center">
-              <Image
-                className="object-contain max-w-full rounded-lg transition-transform transform hover:scale-105 hover:shadow-lg"
-                src="/images/gallery-1.png"
-                alt=""
-                width={78}
-                height={382}
-              />
-            </div>
-            <div className="flex justify-center items-center">
-              <Image
-                className="object-contain max-w-full rounded-lg transition-transform transform hover:scale-105 hover:shadow-lg"
-                src="/images/gallery-2.png"
-                alt=""
-                width={185}
-                height={323}
-              />
-            </div>
-
-            {/* Row 2 */}
-            <div className="flex justify-center items-center">
-              <Image
-                className="object-contain max-w-full rounded-lg transition-transform transform hover:scale-105 hover:shadow-lg"
-                src="/images/gallery-3.png"
-                alt=""
-                width={451}
-                height={312}
-              />
-            </div>
-            <div className="flex justify-center items-center">
-              <Image
-                className="object-contain max-w-full rounded-lg transition-transform transform hover:scale-105 hover:shadow-lg"
-                src="/images/gallery-4.png"
-                alt=""
-                width={344}
-                height={242}
-              />
-            </div>
-
-            {/* Row 3 */}
-            <div className="flex justify-center items-center">
-              <Image
-                className="object-contain max-w-full rounded-lg transition-transform transform hover:scale-105 hover:shadow-lg"
-                src="/images/gallery-5.png"
-                alt=""
-                width={295}
-                height={392}
-              />
-            </div>
-            <div className="flex justify-center items-center">
-              <Image
-                className="object-contain max-w-full rounded-lg transition-transform transform hover:scale-105 hover:shadow-lg"
-                src="/images/gallery-6.png"
-                alt=""
-                width={290}
-                height={348}
-              />
-            </div>
-
-            {/* Row 4 */}
-            <div className="flex justify-center items-center">
-              <Image
-                className="object-contain max-w-full rounded-lg transition-transform transform hover:scale-105 hover:shadow-lg"
-                src="/images/gallery-7.png"
-                alt=""
-                width={178}
-                height={242}
-              />
-            </div>
-            <div className="flex justify-center items-center">
-              <Image
-                className="object-contain max-w-full rounded-lg transition-transform transform hover:scale-105 hover:shadow-lg"
-                src="/images/gallery-8.png"
-                alt=""
-                width={262}
-                height={433}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      
     </div>
   );
 }

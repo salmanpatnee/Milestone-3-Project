@@ -16,9 +16,9 @@ const config: Config = {
   		colors: {
   			text: '#333333',
   			'text-light': '#666666',
-  			primary: '#B88E2F',
-  			secondary: '#F9F1E7',
-  			'bg-light': '#FAF3EA',
+  			primary: '#FF5722',
+  			secondary: '#2196F3',
+  			bglight: '#F5F5F5',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

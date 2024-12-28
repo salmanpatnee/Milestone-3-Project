@@ -8,17 +8,14 @@ const Footer = () => {
         {/* Logo and Address Section */}
         <div className="w-full sm:w-4/12 lg:w-auto md:mb-0 mb-4">
           <Link href="/" className="mb-12 block">
-            <span className="font-bold text-2xl">Funiro.</span>
+            <span className="font-bold text-2xl">NextCart</span>
           </Link>
 
           {/* Address Information */}
           <div className="relative md:me-5">
             <p className="text-[#9F9F9F] text-base leading-6">
-              400 University Drive Suite 200 Coral
-              <br />
-              Gables,
-              <br />
-              FL 33134 USA
+              Discover the best deals on products you love. <br />Shop smarter,
+              faster, and easier with NextCart today
             </p>
           </div>
         </div>
@@ -103,8 +100,8 @@ const Footer = () => {
 
       {/* Footer Bottom Section */}
       <div className="text-center sm:text-start border-t wrapper py-9">
-        <p className="text-black text-base">
-          2023 Furniro. All rights reserved
+        <p className="text-black text-base text-center">
+          2024 NextCart. All rights reserved
         </p>
       </div>
     </footer>
