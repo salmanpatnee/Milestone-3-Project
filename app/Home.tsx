@@ -11,8 +11,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import Hero from "./components/Hero";
 import ProductCard from "./components/ProductCard";
 
+type Product = {
+    _id: string,
+    title: string
+}
+
 interface Props {
-    products: []
+    products: Product[]
 }
 
 
