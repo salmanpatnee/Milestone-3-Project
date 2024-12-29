@@ -3,6 +3,7 @@ import { Poppins} from 'next/font/google';
 import "./globals.css";
 import Header from "./Header";
 import Footer from "./Footer";
+import { SanityLive } from "@/sanity/lib/live";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -26,6 +27,7 @@ export default function RootLayout({
         <Header/>
         <main>
           {children}
+          <SanityLive/>
         </main>
         <Footer/>
         </body>
