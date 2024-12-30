@@ -16,7 +16,7 @@ import axios from "axios";
 import { Product } from "@/lib/types";
 
 const ShopPage = async () => {
-  const response = await axios.get(`http://localhost:3000/api/products`);
+  const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`);
 
   const products: Product[] = await response.data;
 

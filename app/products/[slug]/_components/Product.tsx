@@ -13,12 +13,19 @@ import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { PortableText } from "next-sanity";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { urlFor } from "@/sanity/lib/image";
 
 interface Props {
   product: Product;
 }
 
+
 const ProductDetail = ({ product }: Props) => {
+
+    const productImageUrl = product.image
+    ? urlFor(product.image)?.width(285).height(301).url()
+    : "https://placehold.co/550x310/png";
+
   const [quantity, setQuantity] = useState(1);
   //   const [thumbsSwiper] = useState<Swiper | null>(null); // Corrected type
   // const [thumbsSwiper, setThumbsSwiper] = useState<typeof Swiper | null>(null);
@@ -72,7 +79,11 @@ const ProductDetail = ({ product }: Props) => {
       <section className="flex lg:flex-row flex-col wrapper">
         <div className="lg:w-6/12 w-full lg:pe-10 mb-10 lg:mb-0">
           <div className="flex gap-8">
-            <Swiper
+            <Image src={productImageUrl} alt={product.title}
+            width={400}
+            height={400}
+            className="rounded-t-md w-full"/>
+            {/* <Swiper
               loop={true}
               spaceBetween={10}
               navigation={true}
@@ -94,7 +105,7 @@ const ProductDetail = ({ product }: Props) => {
                   </SwiperSlide>
                 );
               })}
-            </Swiper>
+            </Swiper> */}
           </div>
         </div>
         <div className="lg:w-6/12 w-full">

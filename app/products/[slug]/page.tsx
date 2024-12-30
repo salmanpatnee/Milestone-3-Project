@@ -7,10 +7,33 @@ interface Props {
   params: { slug: string };
 }
 
+// Generate metadata for the page
+export async function generateMetadata({ params }: Props) {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/products/${params.slug}`
+  );
+
+  if (!response.ok) {
+    return {
+      title: "Product Not Found - My Store",
+      description: "The product you are looking for does not exist.",
+    };
+  }
+
+  const product = await response.json();
+
+  return {
+    title: `${product.title} - NextCart`,
+    description: product.description || "Buy the best products at NextCart!",
+  };
+}
+
+
+
 const ProductDetailPage = async ({ params }: Props) => {
   // Fetch data from the API endpoint
   const response = await fetch(
-    `http://localhost:3000/api/products/${params.slug}`
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/products/${params.slug}`
   );
 
   // If the response is not OK, trigger a 404 page
@@ -19,6 +42,8 @@ const ProductDetailPage = async ({ params }: Props) => {
   }
 
   const product: Product = await response.json();
+
+
 
   return <ProductDetail product={product} />;
 };
