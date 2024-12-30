@@ -1,19 +1,11 @@
-import { ChevronRight, Grip, Laptop, SlidersHorizontal } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import Link from "next/link";
-import React from "react";
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import ProductCard from "../components/ProductCard";
-import Pagination from "../components/Pagination";
-import Features from "../components/Features";
-import axios from "axios";
 import { Product } from "@/lib/types";
+import axios from "axios";
+import Features from "../components/Features";
+import Pagination from "../components/Pagination";
+import ProductCard from "../components/ProductCard";
 
 const ShopPage = async () => {
   const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`);
