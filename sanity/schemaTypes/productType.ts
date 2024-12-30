@@ -30,7 +30,7 @@ export const productType = defineType({
             validation: (rule) => rule.required().error('Title is required')
         }),
         defineField({
-            name: 'Slug',
+            name: 'slug',
             type: 'slug',
             options: { source: 'title' },
             validation: (rule) => rule.required().error('Required to generate a page on the website'),

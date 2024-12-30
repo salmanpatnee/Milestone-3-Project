@@ -7,6 +7,8 @@ const PRODUCTS_QUERY = defineQuery(`*[_type == "product"]`);
 
 const HomePage = async () => {
   const { data: products } = await sanityFetch({ query: PRODUCTS_QUERY });
+  console.log(products);
+  
 
   return (    
     <Home products={products}/>

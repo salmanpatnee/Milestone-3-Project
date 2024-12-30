@@ -11,9 +11,21 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import Hero from "./components/Hero";
 import ProductCard from "./components/ProductCard";
 
+type Slug = {
+  current: 'string', 
+  _type: 'string'
+}
+type Image = {
+  _type: 'image'
+}
+
 type Product = {
     _id: string,
-    title: string
+    title: string, 
+    slug: Slug, 
+    // price: number, 
+    // salePrice?: number, 
+    // image?: 
 }
 
 interface Props {
@@ -127,7 +139,15 @@ export default function Home({products}: Props) {
 
           {/* Product Grid */}
           <div className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 gap-6 mt-8">
-            {products.map(product => product.title)}
+            
+            {products.map((product) => {
+              return (
+                <Link href={`/products/${product.slug.current}`}>
+                <p>{product.title}</p>
+                </Link>
+              )
+            })}
+
             {/* {products.map((p) => (
               <ProductCard key={p.imageUrl} product={p} />
             ))} */}
