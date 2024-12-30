@@ -10,115 +10,14 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Hero from "./components/Hero";
 import ProductCard from "./components/ProductCard";
+import { Product } from "@/lib/types";
 
-type Slug = {
-  current: 'string', 
-  _type: 'string'
-}
-type Image = {
-  _type: 'image'
-}
-
-type Product = {
-    _id: string,
-    title: string, 
-    slug: Slug, 
-    // price: number, 
-    // salePrice?: number, 
-    // image?: 
-}
 
 interface Props {
-    products: Product[]
+  products: Product[];
 }
 
-
-export default function Home({products}: Props) {
-  
-
-//   const products = [
-//     {
-//       imageUrl: "/images/products/Lolito.png",
-//       title: "Respira",
-//       slug: "respira",
-//       subTitle: "Stylish cafe chair",
-//       salePrice: "2.50",
-//       price: "3.50",
-//       discount: null,
-//       newArrival: true,
-//     },
-//     {
-//       imageUrl: "/images/products/Lev.png",
-//       title: "Leviosa",
-//       slug: "leviosa",
-//       subTitle: "Outdoor bar table and stool",
-//       salePrice: "7.00",
-//       price: "14.00",
-//       discount: "50",
-//       newArrival: false,
-//     },
-//     {
-//       imageUrl: "/images/products/bed.png",
-//       title: "Syltherine",
-//       slug: "syltherine",
-//       subTitle: "Stylish cafe chair",
-//       salePrice: "2.500",
-//       price: "3.500",
-//       discount: "30",
-//       newArrival: false,
-//     },
-//     {
-//       imageUrl: "/images/products/Syltherine.png",
-//       title: "Syltherine",
-//       slug: "syltherine",
-//       subTitle: "Stylish cafe chair",
-//       salePrice: "2.500",
-//       price: "3.500",
-//       discount: null,
-//       newArrival: true,
-//     },
-//     {
-//       imageUrl: "/images/products/Lolito.png",
-//       title: "Respira",
-//       slug: "respira",
-//       subTitle: "Stylish cafe chair",
-//       salePrice: "2.50",
-//       price: "3.50",
-//       discount: null,
-//       newArrival: true,
-//     },
-//     {
-//       imageUrl: "/images/products/Lev.png",
-//       title: "Leviosa",
-//       slug: "leviosa",
-//       subTitle: "Outdoor bar table and stool",
-//       salePrice: "7.00",
-//       price: "14.00",
-//       discount: "50",
-//       newArrival: false,
-//     },
-//     {
-//       imageUrl: "/images/products/bed.png",
-//       title: "Syltherine",
-//       slug: "syltherine",
-//       subTitle: "Stylish cafe chair",
-//       salePrice: "2.50",
-//       price: "3.50",
-//       discount: "30",
-//       newArrival: false,
-//     },
-//     {
-//       imageUrl: "/images/products/Syltherine.png",
-//       title: "Syltherine",
-//       slug: "syltherine",
-//       subTitle: "Stylish cafe chair",
-//       salePrice: "2.50",
-//       price: "3.50",
-//       discount: null,
-//       newArrival: true,
-//     },
-//   ];
-
+export default function Home({ products }: Props) {
   const slides = [
     { imageUrl: slide1, href: "#" },
     { imageUrl: slide2, href: "#" },
@@ -139,18 +38,9 @@ export default function Home({products}: Props) {
 
           {/* Product Grid */}
           <div className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 gap-6 mt-8">
-            
-            {products.map((product) => {
-              return (
-                <Link href={`/products/${product.slug.current}`}>
-                <p>{product.title}</p>
-                </Link>
-              )
-            })}
-
-            {/* {products.map((p) => (
-              <ProductCard key={p.imageUrl} product={p} />
-            ))} */}
+            {products.map((product) => (
+              <ProductCard key={product._id} product={product} />
+            ))}
           </div>
 
           {/* Show More Button */}
@@ -212,8 +102,6 @@ export default function Home({products}: Props) {
           </div>
         </div>
       </section>
-
-      
     </div>
   );
 }

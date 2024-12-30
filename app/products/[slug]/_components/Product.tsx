@@ -1,79 +1,24 @@
 "use client";
 
-import {
-  ChevronRight,
-  Facebook,
-  FacebookIcon,
-  Grip,
-  Heart,
-  Laptop,
-  Plus,
-  RefreshCw,
-  SlidersHorizontal,
-  Star,
-  Truck,
-  Twitter,
-} from "lucide-react";
+import { ChevronRight, Plus, Star } from "lucide-react";
 import Link from "next/link";
 // import { Heart, RefreshCw, Star, Truck } from "lucide-react";
 // import React, { useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Thumbs, FreeMode, Navigation } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
+import { Product } from "@/lib/types";
 import Image from "next/image";
 import { useState } from "react";
+import "swiper/css";
+import "swiper/css/navigation";
+import { Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { PortableText } from "next-sanity";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import ProductCard from "@/app/components/ProductCard";
-
-const products = [
-  {
-    imageUrl: "/images/products/Lolito.png",
-    title: "Respira",
-    slug: "respira",
-    subTitle: "Stylish cafe chair",
-    salePrice: "2.50",
-    price: "3.50",
-    discount: null,
-    newArrival: true,
-  },
-  {
-    imageUrl: "/images/products/Lev.png",
-    title: "Leviosa",
-    slug: "leviosa",
-    subTitle: "Outdoor bar table and stool",
-    salePrice: "7.00",
-    price: "14.00",
-    discount: "50",
-    newArrival: false,
-  },
-  {
-    imageUrl: "/images/products/bed.png",
-    title: "Syltherine",
-    slug: "syltherine",
-    subTitle: "Stylish cafe chair",
-    salePrice: "2.500",
-    price: "3.500",
-    discount: "30",
-    newArrival: false,
-  },
-  {
-    imageUrl: "/images/products/Syltherine.png",
-    title: "Syltherine",
-    slug: "syltherine",
-    subTitle: "Stylish cafe chair",
-    salePrice: "2.500",
-    price: "3.500",
-    discount: null,
-    newArrival: true,
-  },
-];
 
 interface Props {
-  params: { slug: string[] };
+  product: Product;
 }
 
-const ProductPage = ({ params: { slug } }: Props) => {
+const ProductDetail = ({ product }: Props) => {
   const [quantity, setQuantity] = useState(1);
   //   const [thumbsSwiper] = useState<Swiper | null>(null); // Corrected type
   // const [thumbsSwiper, setThumbsSwiper] = useState<typeof Swiper | null>(null);
@@ -93,17 +38,14 @@ const ProductPage = ({ params: { slug } }: Props) => {
   };
 
   return (
-    <article className={`product-${slug}`}>
-      <section className="bg-secondary mb-9">
+    <article className={`product-${product.slug.current}`}>
+      <section className="bg-bglight mb-9">
         <div className="wrapper py-10 flex items-center justify-between">
           <div className="flex">
             <div className="flex items-center space-x-2">
               <ul className="flex space-x-5 text-base text-[#9F9F9F]">
                 <li>
-                  <Link
-                    href="/home"
-                    className="hover:text-black transition-all"
-                  >
+                  <Link href="/" className="hover:text-black transition-all">
                     Home
                   </Link>
                 </li>
@@ -121,7 +63,7 @@ const ProductPage = ({ params: { slug } }: Props) => {
               </ul>
             </div>
             <div className="ms-7 border-s-2 border-[#9F9F9F]">
-              <p className="text-base ms-8">Asgaard sofa</p>
+              <p className="text-base ms-8">{product.title}</p>
             </div>
           </div>
         </div>
@@ -156,9 +98,9 @@ const ProductPage = ({ params: { slug } }: Props) => {
           </div>
         </div>
         <div className="lg:w-6/12 w-full">
-          <h2 className="text-[42px] text-black mb-1">Asgaard sofa</h2>
+          <h2 className="text-[42px] text-black mb-1">{product.title}</h2>
           <p className="text-2xl mb-4 font-medium text-[#9F9F9F]">
-            Rs. 250,000.00
+            {product.price && `PKR ${product.price}`}
           </p>
           <div className="flex items-center gap-3 mb-4">
             <div className="gap-1 flex border-e-2 pe-5">
@@ -191,11 +133,16 @@ const ProductPage = ({ params: { slug } }: Props) => {
             <p className="text-[#9F9F9F] text-xs">5 Customer Review</p>
           </div>
 
-          <p className="text-xs mb-5">
-            Setting the bar as one of the loudest speakers in its class, the
-            Kilburn is a compact, stout-hearted hero with a well-balanced audio
-            which boasts a clear midrange and extended highs for a sound.
-          </p>
+          {product.details && product.details.length > 0 && (
+            <div className="prose max-w-none">
+              <PortableText value={product.details} />
+            </div>
+          )}
+
+          {/* <p className="text-xs mb-5">
+            <PortableText value={product.details}/>
+            
+          </p> */}
           <div className="flex-col gap-6 items-center mb-6">
             <span className="text-sm text-[#9F9F9F] block mb-2">Size:</span>
             <div className="flex items-center gap-4">
@@ -248,7 +195,10 @@ const ProductPage = ({ params: { slug } }: Props) => {
                 +
               </button>
             </div>
-            <Link href="/cart" className="flex items-center bg-white text-black border border-black rounded-lg text-center h-16 px-12 text-base hover:bg-primary hover:text-white hover:border-primary">
+            <Link
+              href="/cart"
+              className="flex items-center bg-white text-black border border-black rounded-lg text-center h-16 px-12 text-base hover:bg-primary hover:text-white hover:border-primary"
+            >
               Add To Cart
             </Link>
             <button className="bg-white text-black border border-black rounded-lg text-center h-16 px-12 text-base hover:bg-primary hover:text-white hover:border-primary flex items-center justify-center space-x-2">
@@ -410,28 +360,8 @@ const ProductPage = ({ params: { slug } }: Props) => {
           </Tabs>
         </div>
       </section>
-
-      <section className="mb-16">
-        <div className="wrapper">
-          <h2 className="title">Our Products</h2>
-
-          <div className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 gap-6 mt-8">
-            {products.map((p) => {
-              return <ProductCard key={p.imageUrl} product={p} />;
-            })}
-          </div>
-          <div className="text-center mt-12">
-            <Link
-              href="/shop"
-              className="bg-white border border-primary text-primary text-center py-3 px-20 text-base font-semibold hover:bg-secondary "
-            >
-              Show More
-            </Link>
-          </div>
-        </div>
-      </section>
     </article>
   );
 };
 
-export default ProductPage;
+export default ProductDetail;
