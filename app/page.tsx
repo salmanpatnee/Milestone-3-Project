@@ -1,18 +1,12 @@
-import React from 'react'
-import Home from './Home'
-import { defineQuery } from "next-sanity";
-import { sanityFetch } from "@/sanity/lib/live";
-
-const PRODUCTS_QUERY = defineQuery(`*[_type == "product"]`);
+import React from 'react';
+import Home from './Home';
 
 const HomePage = async () => {
-  const { data: products } = await sanityFetch({ query: PRODUCTS_QUERY });
-  console.log(products);
-  
 
-  return (    
-    <Home products={products}/>
-  )
-}
+  const response = await fetch('http://localhost:3000/api/products');
+  const products = await response.json();
+    
+  return <Home products={products} />;
+};
 
-export default HomePage
+export default HomePage;
