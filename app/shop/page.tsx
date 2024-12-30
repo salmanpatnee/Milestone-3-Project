@@ -8,9 +8,9 @@ import Pagination from "../components/Pagination";
 import ProductCard from "../components/ProductCard";
 
 const ShopPage = async () => {
-  const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`);
 
-  const products: Product[] = await response.data;
+  const products: Product[] = await response.json();
 
   return (
     <div>
