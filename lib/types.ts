@@ -19,5 +19,6 @@ export type Product = {
   title: string;
   slug: Slug;
   salePrice: number; 
-  details: any
+  details: any;
+  quantity?: number | 0
 };
