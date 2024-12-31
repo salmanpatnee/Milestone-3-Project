@@ -1,41 +1,62 @@
-// cartContext.ts
-import React, { createContext, useContext, useState } from "react";
-import { Product } from "@/lib/types"; // Import both Product and CartItem
+"use client";
+
+import React, { createContext, useContext, useState, useEffect } from "react";
+import { Product } from "@/lib/types"; 
 
 // Define the shape of the CartContext
 interface CartContextType {
   cart: { cartItems: Product[] };
-  addItemToCart: (item: Product) => void; // Accept CartItem
+  addItemToCart: (item: Product) => void;
   updateCart: (cartItems: Product[]) => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
-  const [cart, setCart] = useState({ cartItems: [] as Product[] });
+  const [cart, setCart] = useState<{ cartItems: Product[] }>({ cartItems: [] });
+
+  // Sync cart state with localStorage on component mount
+  useEffect(() => {
+    const storedCart = localStorage.getItem("cart");
+    if (storedCart) {
+      setCart(JSON.parse(storedCart));
+    }
+  }, []);
 
   // Function to add item to cart
-  const addItemToCart = (item: Product) => {
+  const addItemToCart = (product: Product): void => {
+    const item = {
+      ...product,
+      quantity: product.quantity || 1, // Default quantity to 1 if not provided
+    };
+  
+    // Find if the product already exists in the cart
     const isItemExist = cart.cartItems.find((i) => i._id === item._id);
-    
+  
     let newCartItems;
-
     if (isItemExist) {
+      // If item exists, increment its quantity
       newCartItems = cart.cartItems.map((i) =>
-        i._id === item._id ? { ...i, quantity: i.quantity! + item.quantity! } : i
+        i._id === isItemExist._id
+          ? { ...i, quantity: (i.quantity || 1) + (item.quantity || 1) }
+          : i
       );
     } else {
+      // Otherwise, add the new item
       newCartItems = [...cart.cartItems, item];
     }
-
-    // Update cart in context
-    updateCart(newCartItems);
+  
+    // Update the cart and persist to localStorage
+    const updatedCart = { cartItems: newCartItems };
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
-
-  // Update cart
+  
+  // Function to update the cart directly
   const updateCart = (cartItems: Product[]) => {
-    setCart({ cartItems });
-    localStorage.setItem("cart", JSON.stringify({ cartItems }));
+    const updatedCart = { cartItems };
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    setCart(updatedCart);
   };
 
   return (
@@ -46,7 +67,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 // Hook to use CartContext in any component
-export const useCart = () => {
+export const useCart = (): CartContextType => {
   const context = useContext(CartContext);
   if (!context) {
     throw new Error("useCart must be used within a CartProvider");

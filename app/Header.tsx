@@ -1,9 +1,7 @@
-import React from "react";
-import Image from "next/image";
-import Link from "next/link";
-import Navbar from "./components/Navbar";
 import { Heart, Search, ShoppingCart, UserRound } from "lucide-react";
+import Link from "next/link";
 import MobileNavbar from "./components/MobileNavbar";
+import Navbar from "./components/Navbar";
 
 import MiniCart from "./components/MiniCart";
 

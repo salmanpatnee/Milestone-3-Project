@@ -1,16 +1,15 @@
-import React from "react";
 import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-  } from "@/components/ui/popover";
-import Image from "next/image";
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { ShoppingCart } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 const MiniCart = () => {
   return (
-    <Popover>
+    <Popover open={false}>
       <PopoverTrigger className="group">
         <ShoppingCart
           size={32}
