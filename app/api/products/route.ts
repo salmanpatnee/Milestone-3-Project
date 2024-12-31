@@ -1,9 +1,20 @@
-import { defineQuery } from "next-sanity";
-import { sanityFetch } from "@/sanity/lib/live";
+import { client } from "@/sanity/lib/client";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
-  const PRODUCTS_QUERY = defineQuery(`*[_type == "product"]`);
-  const { data: products } = await sanityFetch({ query: PRODUCTS_QUERY });
-  return NextResponse.json(products);
+  try {
+    const products = await client.fetch(
+      '*[_type == "product"]',
+      {},
+      { cache: "no-store" }
+    );
+
+    return NextResponse.json(products);
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    return NextResponse.json(
+      { error: "Error fetching products" },
+      { status: 500 }
+    );
+  }
 }

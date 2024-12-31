@@ -1,16 +1,12 @@
-import React from 'react';
 import Home from './Home';
-import axios from "axios"
-
-
 
 const HomePage = async () => {
+  const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+  const response = await fetch(`${baseURL}/api/products`, { cache: "no-store" });
+  const products = await response.json();
 
-  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`);
-  
-  const products = await response.json()
-    
   return <Home products={products} />;
 };
 
 export default HomePage;
+

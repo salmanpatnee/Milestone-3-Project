@@ -9,9 +9,9 @@ import Link from "next/link";
 
 const links = [
   { label: "Home", href: "/" },
-  { label: "Shop", href: "/shop" },
-  { label: "Blog", href: "/blog" },
-  { label: "Contact", href: "/contact" },
+  { label: "Shop", href: "/" },
+  { label: "Blog", href: "/" },
+  { label: "Contact", href: "/" },
 ];
 
 const Navbar = () => {
