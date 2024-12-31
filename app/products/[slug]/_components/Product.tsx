@@ -14,6 +14,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { PortableText } from "next-sanity";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { urlFor } from "@/sanity/lib/image";
+import AddToCart from "./AddToCart";
 
 interface Props {
   product: Product;
@@ -185,12 +186,7 @@ const ProductDetail = ({ product }: Props) => {
                 +
               </button>
             </div>
-            <Link
-              href="/cart"
-              className="flex items-center bg-primary text-white border border-primary rounded-lg text-center h-16 px-12 text-base hover:bg-black hover:text-white hover:border-black"
-            >
-              Add To Cart
-            </Link>
+            <AddToCart product={product}/>
             <button className="bg-white text-black border border-black rounded-lg text-center h-16 px-12 text-base hover:bg-primary hover:text-white hover:border-primary flex items-center justify-center space-x-2">
               <Plus />
               <span>Compare</span>
