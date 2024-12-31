@@ -1,36 +1,17 @@
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 
 import { Product } from "@/lib/types";
 import Features from "../components/Features";
 import Pagination from "../components/Pagination";
 import ProductCard from "../components/ProductCard";
 
+
 const ShopPage = async () => {
-  const apiBaseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-
-  if (!apiBaseUrl) {
-    throw new Error("API Base URL is not defined in the environment variables");
-  }
-
-  // Fetch the products data from the API
-  const response = await fetch(`${apiBaseUrl}/api/products`, {
-    cache: "no-store", // Ensures fresh data is fetched each time
-  });
-
-  if (!response.ok) {
-    console.error("Failed to fetch products:", response.statusText);
-    notFound(); // Redirect to a 404 page if data fetch fails
-  }
-
-  const contentType = response.headers.get("content-type");
-  if (!contentType || !contentType.includes("application/json")) {
-    console.error("Invalid response format:", await response.text());
-    notFound();
-  }
-
-  const products: Product[] = await response.json();
+  
+  const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+  const response = await fetch(`${baseURL}/api/products`, { cache: "no-store" });
+  const products = await response.json();
 
   return (
     <div>
@@ -51,7 +32,7 @@ const ShopPage = async () => {
 
       <section className="wrapper">
         <div className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 grid-cols-1 gap-6 mt-8">
-          {products.map((product) => (
+          {products.map((product: Product) => (
             <ProductCard key={product._id} product={product} />
           ))}
         </div>
