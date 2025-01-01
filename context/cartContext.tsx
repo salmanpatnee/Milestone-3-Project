@@ -1,12 +1,13 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { Product } from "@/lib/types"; 
+import { Product } from "@/lib/types";
 
 // Define the shape of the CartContext
 interface CartContextType {
   cart: { cartItems: Product[] };
   addItemToCart: (item: Product) => void;
+  removeItemFromCart: (itemId: string) => void;
   updateCart: (cartItems: Product[]) => void;
 }
 
@@ -29,10 +30,10 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       ...product,
       quantity: product.quantity || 1, // Default quantity to 1 if not provided
     };
-  
+
     // Find if the product already exists in the cart
     const isItemExist = cart.cartItems.find((i) => i._id === item._id);
-  
+
     let newCartItems;
     if (isItemExist) {
       // If item exists, increment its quantity
@@ -45,13 +46,25 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       // Otherwise, add the new item
       newCartItems = [...cart.cartItems, item];
     }
-  
+
     // Update the cart and persist to localStorage
     const updatedCart = { cartItems: newCartItems };
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
-  
+
+  // In CartContext
+
+  const removeItemFromCart = (itemId: string): void => {
+    // Filter out the item from the cart by ID
+    const newCartItems = cart.cartItems.filter((item) => item._id !== itemId);
+
+    // Update the cart state and persist to localStorage
+    const updatedCart = { cartItems: newCartItems };
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  };
+
   // Function to update the cart directly
   const updateCart = (cartItems: Product[]) => {
     const updatedCart = { cartItems };
@@ -60,7 +73,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <CartContext.Provider value={{ cart, addItemToCart, updateCart }}>
+    <CartContext.Provider value={{ cart, addItemToCart, updateCart, removeItemFromCart }}>
       {children}
     </CartContext.Provider>
   );

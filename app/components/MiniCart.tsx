@@ -1,15 +1,34 @@
+"use client";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { useCart } from "@/context/cartContext"; // Assuming the cart context is set up
+import { urlFor } from "@/sanity/lib/image";
 import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import toast, { Toaster } from "react-hot-toast";
 
 const MiniCart = () => {
+  const { cart, removeItemFromCart } = useCart();
+
+  const calculateSubtotal = (price: number, quantity: number) =>
+    price * quantity;
+  const calculateTotal = () =>
+    parseFloat(
+      cart.cartItems.reduce(
+        (total, item) =>
+          total + calculateSubtotal(item.price, item.quantity || 1),
+        0
+      ).toFixed(2)
+    );
+
   return (
-    <Popover open={false}>
+    <>
+    
+    <Popover>
       <PopoverTrigger className="group">
         <ShoppingCart
           size={32}
@@ -23,74 +42,59 @@ const MiniCart = () => {
           Shopping Cart
         </h4>
 
-        {/* Cart Item 1 */}
-        <div className="flex items-center justify-between mb-5">
-          <div>
-            <Image
-              src="/images/cart-item-1.png"
-              alt="Sofa"
-              width={111}
-              height={90}
-              className="rounded-lg bg-[#efe6d1]"
-            />
-          </div>
-          <div>
-            <p className="text-base mb-2">Asgaard Sofa</p>
-            <p className="flex space-x-4 items-center">
-              <span className="font-light text-base">1</span>
-              <span className="font-light text-base">X</span>
-              <span className="font-medium text-primary text-xs">
-                Rs. 250,000.00
-              </span>
-            </p>
-          </div>
-          <div>
-            <Image
-              src="/images/icons/close.png"
-              width={20}
-              height={20}
-              alt="Close"
-              className="cursor-pointer"
-            />
-          </div>
-        </div>
-
-        {/* Cart Item 2 */}
-        <div className="flex items-center justify-between">
-          <div>
-            <Image
-              src="/images/cart-item-1.png"
-              alt="Sofa"
-              width={111}
-              height={90}
-              className="rounded-lg bg-[#efe6d1]"
-            />
-          </div>
-          <div>
-            <p className="text-base mb-2">Asgaard Sofa</p>
-            <p className="flex space-x-4 items-center">
-              <span className="font-light text-base">1</span>
-              <span className="font-light text-base">X</span>
-              <span className="font-medium text-primary text-xs">
-                Rs. 250,000.00
-              </span>
-            </p>
-          </div>
-          <div>
-            <Image
-              src="/images/icons/close.png"
-              width={20}
-              height={20}
-              alt="Close"
-              className="cursor-pointer"
-            />
-          </div>
-        </div>
+        {/* Dynamically rendering cart items */}
+        {cart.cartItems.length === 0 ? (
+          <p className="text-center">Your cart is empty.</p>
+        ) : (
+          cart.cartItems.map((item) => (
+            <div
+              key={item._id}
+              className="flex items-center justify-between mb-5"
+            >
+              <div>
+                <Image
+                  src={
+                    item.image
+                      ? urlFor(item.image)?.width(80).height(80).url()
+                      : "/images/placeholder.png"
+                  }
+                  alt={item.title}
+                  width={60}
+                  height={60}
+                  className="rounded-lg bg-[#efe6d1]"
+                />
+              </div>
+              <div>
+                <p className="text-base mb-2">{item.title}</p>
+                <p className="flex space-x-4 items-center">
+                  <span className="font-light text-base">
+                    {item.quantity || 1}
+                  </span>
+                  <span className="font-light text-base">X</span>
+                  <span className="font-medium text-primary text-xs">
+                    Rs. {item.price}
+                  </span>
+                </p>
+              </div>
+              <div>
+                <Image
+                  src="/images/icons/close.png"
+                  width={20}
+                  height={20}
+                  alt="Close"
+                  className="cursor-pointer" onClick={() => {
+                    removeItemFromCart(item._id)
+                  }} // Call removeItemFromCart
+                />
+              </div>
+            </div>
+          ))
+        )}
 
         {/* Cart Summary */}
         <div className="mt-20 flex text-base justify-between border-b border-[#D9D9D9] pb-6">
           <p>Subtotal</p>
-          <p className="text-primary font-medium">Rs. 520,000.00</p>
+          <p className="text-primary font-medium">Rs. {calculateTotal()}</p>
         </div>
 
         {/* Cart Actions */}
@@ -116,6 +120,7 @@ const MiniCart = () => {
         </div>
       </PopoverContent>
     </Popover>
+    </>
   );
 };
 
