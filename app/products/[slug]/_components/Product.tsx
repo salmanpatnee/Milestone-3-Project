@@ -1,19 +1,11 @@
-"use client";
-
 import { ChevronRight, Plus, Star } from "lucide-react";
 import Link from "next/link";
-// import { Heart, RefreshCw, Star, Truck } from "lucide-react";
-// import React, { useState } from "react";
 import { Product } from "@/lib/types";
 import Image from "next/image";
-import { useState } from "react";
-import "swiper/css";
-import "swiper/css/navigation";
-import { Navigation } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { PortableText } from "next-sanity";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { urlFor } from "@/sanity/lib/image";
+import { PortableText } from "next-sanity";
 import AddToCart from "./AddToCart";
 
 interface Props {
@@ -25,12 +17,7 @@ const ProductDetail = ({ product }: Props) => {
     ? urlFor(product.image)?.width(285).height(301).url()
     : "https://placehold.co/550x310/png";
 
-  const [quantity, setQuantity] = useState(1);
-
-  const increment = () => setQuantity((prev) => prev + 1);
-  const decrement = () => {
-    if (quantity > 1) setQuantity((prev) => prev - 1);
-  };
+  
 
   return (
     <article className={`product-${product.slug.current}`}>
@@ -163,29 +150,7 @@ const ProductDetail = ({ product }: Props) => {
           </div> */}
 
           <div className="flex flex-col md:flex-row gap-2 border-b pb-14 mb-10">
-            <div className="flex items-center">
-              <button
-                onClick={decrement}
-                className="w-10 h-16 text-gray-700 rounded-s-lg border border-black border-e-0 hover:bg-primary focus:outline-none hover:text-white hover:border-primary"
-              >
-                -
-              </button>
-
-              <input
-                type="number"
-                value={quantity}
-                min="1"
-                readOnly
-                className="border-y border-black focus:outline-none h-16 text-center w-10"
-              />
-
-              <button
-                onClick={increment}
-                className="w-10 h-16 text-gray-700 rounded-e-lg border border-black border-s-0 hover:bg-primary focus:outline-none hover:text-white hover:border-primary"
-              >
-                +
-              </button>
-            </div>
+            <Quantity/>
             <AddToCart product={product}/>
             <button className="bg-white text-black border border-black rounded-lg text-center h-16 px-12 text-base hover:bg-primary hover:text-white hover:border-primary flex items-center justify-center space-x-2">
               <Plus />

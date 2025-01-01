@@ -1,39 +1,18 @@
 import {
-  ChevronRight,
-  Trash,
+  Trash
 } from "lucide-react";
 import Link from "next/link";
-import React from "react";
 
 import Image from "next/image";
 import Features from "../components/Features";
+import PageHeader from "../components/PageHeader";
 
 const ShopPage = () => {
 
 
   return (
     <div>
-      <header className='text-center py-28 bg-[url("/images/banners/shop.png")] bg-cover bg-fixed bg-no-repeat bg-left'>
-        <Image
-          src="/images/furniro-icon.png"
-          width={70}
-          height={70}
-          alt="Furniro"
-          className="mx-auto"
-        />
-        <h1 className="font-medium text-5xl mb-4">Cart</h1>
-        <nav className="flex justify-center">
-          <ul className="flex items-center space-x-2 font-medium text-base">
-            <li className="font-medium">
-              <Link href="/">Home</Link>
-            </li>
-            <li>
-              <ChevronRight />
-            </li>
-            <li className="font-light">Cart</li>
-          </ul>
-        </nav>
-      </header>
+      <PageHeader title="Cart"/>
 
       <section className="wrapper lg:py-20 py-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
