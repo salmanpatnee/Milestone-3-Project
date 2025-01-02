@@ -7,7 +7,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import AddToCart from "./_components/AddToCart";
-import Quantity from "./_components/Quantity";
 
 interface Props {
   params: { slug: string };
