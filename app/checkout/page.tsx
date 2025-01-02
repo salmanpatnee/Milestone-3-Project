@@ -1,10 +1,7 @@
-import { ChevronRight, Trash } from "lucide-react";
-import Link from "next/link";
-import React from "react";
-
-import Image from "next/image";
+"use client";
 import Features from "../components/Features";
 import InputGroup from "../components/Input";
+import { useCart } from "@/context/cartContext";
 
 import {
   Accordion,
@@ -12,31 +9,28 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import PageHeader from "../components/PageHeader";
 
 const CheckoutPage = () => {
+  const { cart } = useCart();
+
+  const calculateSubtotal = (price: number, quantity: number) =>
+    price * quantity;
+
+  const calculateTotal = () =>
+    parseFloat(
+      cart.cartItems
+        .reduce(
+          (total, item) =>
+            total + calculateSubtotal(item.price, item.quantity || 1),
+          0
+        )
+        .toFixed(2)
+    );
+
   return (
     <div>
-      <header className='text-center py-28 bg-[url("/images/banners/shop.png")] bg-cover bg-fixed bg-no-repeat bg-left'>
-        <Image
-          src="/images/furniro-icon.png"
-          width={70}
-          height={70}
-          alt="Furniro"
-          className="mx-auto"
-        />
-        <h1 className="font-medium text-5xl mb-4">Checkout</h1>
-        <nav className="flex justify-center">
-          <ul className="flex items-center space-x-2 font-medium text-base">
-            <li className="font-medium">
-              <Link href="/">Home</Link>
-            </li>
-            <li>
-              <ChevronRight />
-            </li>
-            <li className="font-light">Checkout</li>
-          </ul>
-        </nav>
-      </header>
+      <PageHeader title="Checkout" />
 
       <section className="wrapper lg:py-20 py-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -136,24 +130,32 @@ const CheckoutPage = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr className="hover:bg-gray-100 text-base">
-                      <td className="py-3 px-4 text-[#9F9F9F] ">
-                        Asgaard sofa
-                      </td>
-                      <td className="py-3 px-4 text-gray-700 font-light text-right">
-                        Rs. 250,000
-                      </td>
-                    </tr>
+                    {cart.cartItems.map((item) => {
+                      return (
+                        <tr
+                          className="hover:bg-gray-100 text-base"
+                          key={item._id}
+                        >
+                          <td className="py-3 px-4 text-[#9F9F9F] ">
+                            {item.title}
+                          </td>
+                          <td className="py-3 px-4 text-gray-700 font-light text-right">
+                            Rs. {calculateSubtotal(item.price, item.quantity || 1)}
+                          </td>
+                        </tr>
+                      );
+                    })}
+
                     <tr className="hover:bg-gray-100 text-base">
                       <td className="py-3 px-4 ">Subtotal</td>
                       <td className="py-3 px-4 font-light text-right">
-                        Rs. 250,000
+                        Rs. {calculateTotal()}
                       </td>
                     </tr>
                     <tr className="hover:bg-gray-100 text-base">
                       <td className="py-3 px-4 ">Total</td>
                       <td className="py-3 px-4 text-right text-primary font-bold lg:text-2xl text-xl">
-                        Rs. 250,000
+                        Rs. {calculateTotal()}
                       </td>
                     </tr>
                   </tbody>
@@ -208,7 +210,7 @@ const CheckoutPage = () => {
               </p>
               <div className="text-center mt-10">
                 <button className="bg-transparent text-black border border-black rounded-lg h-12 lg:h-14 px-8 lg:px-16 text-sm lg:text-base hover:bg-primary hover:text-white hover:border-primary transition">
-                Place order
+                  Place order
                 </button>
               </div>
             </section>

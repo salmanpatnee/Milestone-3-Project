@@ -34,7 +34,7 @@ const AddToCart = ({ product }: Props) => {
         onClick={addToCart}
         className="flex items-center bg-primary text-white border border-primary rounded-lg text-center h-16 px-12 text-base hover:bg-black hover:text-white hover:border-black"
       >
-        Add To Cart
+        Buy Now
       </button>
       <Toaster position="bottom-center" reverseOrder={false} />
     </>

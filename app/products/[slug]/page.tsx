@@ -183,7 +183,7 @@ const ProductDetailPage = async ({ params }: Props) => {
           </div> */}
 
           <div className="flex flex-col md:flex-row gap-2 border-b pb-14 mb-10">
-            <Quantity/>
+            {/* <Quantity/> */}
             <AddToCart product={product}/>
             <button className="bg-white text-black border border-black rounded-lg text-center h-16 px-12 text-base hover:bg-primary hover:text-white hover:border-primary flex items-center justify-center space-x-2">
               <Plus />
