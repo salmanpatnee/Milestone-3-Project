@@ -9,7 +9,8 @@ import { urlFor } from "@/sanity/lib/image";
 import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import toast, { Toaster } from "react-hot-toast";
+
+import { Badge } from "@/components/ui/badge"
 
 const MiniCart = () => {
   const { cart, removeItemFromCart } = useCart();
@@ -29,11 +30,12 @@ const MiniCart = () => {
     <>
     
     <Popover>
-      <PopoverTrigger className="group">
+      <PopoverTrigger className="group relative">
         <ShoppingCart
           size={32}
           className="stroke-current text-black transition-colors group-hover:stroke-primary"
-        />
+        /><Badge className="bg-primary text-white rounded-full w-6 h-6 absolute -top-3 -right-4  text-center p-2 text-xs">{cart.cartItems.length}</Badge>
+
       </PopoverTrigger>
 
       {/* Popover Content (Shopping Cart Summary) */}
