@@ -1,47 +1,31 @@
-# E-commerce Figma to Next.js Static Template
+# E-commerce Site with Next.js and Sanity  
 
-## Project Overview
-This project involves converting a Figma-based e-commerce design into a static Next.js template. Below is a brief description of my approach to building this static template.
+This project is a fully functional e-commerce website built using **Next.js** and **Sanity** as a CMS. It showcases modern web development techniques and offers a seamless shopping experience.  
 
-## Approach
+## Features  
 
-1. **Design Analysis**  
-   I began by thoroughly analyzing the Figma design to understand the layout and structure of the website. I identified reusable components and elements that appear across different pages, such as headers, footers, buttons, and product cards.
+- **Sanity Integration**  
+  - Used Sanity CMS to manage and organize product data.  
+  - Fetch data using Next.js **route handlers** for efficient server-side rendering.  
 
-2. **Tailwind CSS Customization**  
-   After identifying the design elements, I extracted the primary, secondary, accent, and text colors, as well as the fonts used in the design. I customized the Tailwind CSS configuration to include these colors and fonts, ensuring consistency throughout the template.
+- **Single Product Detail Page**  
+  - Dynamically fetch and display individual product details using Sanity and route handlers.  
 
-3. **Component Creation**  
-   The next step was to build the header and footer as separate components, allowing them to be reused across multiple pages. This ensures that any changes to the layout can be made in one place, maintaining uniformity across the static pages.
+- **Cart Functionality**  
+  - Implemented cart system with **local storage** to persist data.  
+  - Managed cart state using **React Context API** for consistent user experience.  
 
-4. **Reusable Utility Classes**  
-   To improve development efficiency, I created a set of reusable Tailwind utility classes. These include:
-   - `wrapper`: Acts as a container for centering content (similar to Bootstrap’s container).
-   - `title`: A consistent style for headings throughout the template.
+- **Form Validation**  
+  - Integrated **react-hook-form** and **Zod** for client-side form validation.  
+  - Ensures accurate user input and enhances usability.  
 
-5. **Reusable Components**  
-   I developed a variety of reusable components to save time and keep the code DRY (Don't Repeat Yourself). These components include:
-   - BlogPost
-   - CategoryCard
-   - ProductCard
-   - FeatureSection
-   - HeroSection
-   - Input Fields
-   - Mini Cart
-   - Pagination
+## Tech Stack  
 
-6. **Static Page Development**  
-   I created the following pages based on the Figma design as static templates:
-   - [Home](https://q2-uiux-hackathon.vercel.app/)
-   - [Shop](https://q2-uiux-hackathon.vercel.app/shop)
-   - [Product Detail](https://q2-uiux-hackathon.vercel.app/products/respira)
-   - [Cart](https://q2-uiux-hackathon.vercel.app/cart)
-   - [Checkout](https://q2-uiux-hackathon.vercel.app/checkout)
-   - [Contact](https://q2-uiux-hackathon.vercel.app/contact)
-   - [Blog](https://q2-uiux-hackathon.vercel.app/blog)
-
-## Conclusion
-By carefully analyzing the design and breaking it down into reusable components, I was able to efficiently convert the Figma design into a static Next.js template. This template can be easily extended or integrated into a fully dynamic application in the future.
+- **Frontend**: Next.js, React, CSS  
+- **Backend**: Sanity CMS, Route Handlers  
+- **State Management**: React Context API  
+- **Validation**: react-hook-form, Zod  
+- **Storage**: Local Storage  
 
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
