@@ -32,7 +32,7 @@ const AddToCart = ({ product }: Props) => {
     <>
       <button
         onClick={addToCart}
-        className="flex items-center bg-primary text-white border border-primary rounded-lg text-center h-16 px-12 text-base hover:bg-black hover:text-white hover:border-black"
+        className="flex items-center justify-center bg-primary text-white border border-primary rounded-lg text-center h-16 px-12 text-base hover:bg-black hover:text-white hover:border-black"
       >
         Buy Now
       </button>
