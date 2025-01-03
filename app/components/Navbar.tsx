@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   NavigationMenu,
@@ -6,6 +7,8 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import Link from "next/link";
+import classnames from "classnames";
+import { usePathname } from "next/navigation";
 
 const links = [
   { label: "Home", href: "/" },
@@ -15,6 +18,8 @@ const links = [
 ];
 
 const Navbar = () => {
+  const currentPath = usePathname();
+
   return (
     <NavigationMenu>
       <NavigationMenuList className="lg:space-x-16 sm:space-x-10">
@@ -22,7 +27,10 @@ const Navbar = () => {
           <NavigationMenuItem key={link.href}>
             <Link href={link.href} legacyBehavior passHref>
               <NavigationMenuLink
-                className={` text-black text-base font-medium hover:text-primary`}
+                className={classnames({
+                  "text-primary": link.href === currentPath,
+                  "text-black text-base font-medium hover:text-primary": true,
+                })}
               >
                 {link.label}
               </NavigationMenuLink>

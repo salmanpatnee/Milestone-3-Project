@@ -7,7 +7,8 @@ import ProductCard from './components/ProductCard';
 const HomePage = async () => {
   const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
   const response = await fetch(`${baseURL}/api/products`, { cache: "no-store" });
-  const products: Product[] = await response.json();
+  let products: Product[] = await response.json();
+  products = products.slice(0, 4);
 
   return (
     <div>
@@ -31,7 +32,7 @@ const HomePage = async () => {
           <div className="text-center mt-12">
             <Link
               href="/shop"
-              className="bg-white border border-primary text-primary text-center py-3 px-20 text-base font-semibold hover:bg-secondary"
+              className="bg-white border border-primary text-primary text-center py-3 px-20 text-base font-semibold hover:bg-black hover:text-white hover-border-black"
             >
               Show More
             </Link>
